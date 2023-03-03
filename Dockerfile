@@ -10,7 +10,8 @@
 FROM alpine:latest
 
 # Actualizar paquetes alpine / instalar Nginx / instlar jdk 1ava 11 /openrc /supervisord
-RUN apk update && apk upgrade && apk add --no-cache supervisor openssh nginx && apk add openrc && apk add openjdk11 && apk add nano && openrc &&  touch /run/openrc/softlevel
+RUN apk update && apk upgrade && apk add --no-cache supervisor openssh nginx  openjdk11 nano
+##RUN apk add openrc &&  touch /run/openrc/softlevel
 
 ### maven install
 ENV MAVEN_VERSION 3.5.4
@@ -47,3 +48,9 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 #docker run -d --name c_micro -p 80:80 i_docker
 #conectarse a la maquina
 #docker exec -it c_micro /bin/sh
+
+
+##docker registry
+# aws ecr get-login-password --region us-east-1 --profile pepe | docker login --username AWS --password-stdin 152863749091.dkr.ecr.us-east-1.amazonaws.com
+#docker tag i_docker_fargate:latest 152863749091.dkr.ecr.us-east-1.amazonaws.com/nivelics-pipe:latest
+# docker push 152863749091.dkr.ecr.us-east-1.amazonaws.com/nivelics-pipe:latest
